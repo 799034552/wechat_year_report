@@ -1,0 +1,10 @@
+jieba==0.42.1
+numpy==1.24.3
+Pillow==9.5.0
+Pillow==10.1.0
+pilmoji==2.0.4
+protobuf==4.25.1
+Requests==2.31.0
+tqdm==4.65.0
+wexpect==4.0.0
+wordcloud==1.9.3

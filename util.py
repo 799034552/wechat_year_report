@@ -41,7 +41,7 @@ def get_avator(wxid, avatar_path):
     if is_find:
         return  path + '/'+ avatar
     else:
-        return None
+        return "pic/default_avatar.jpg"
 
 def filter_by_type(msgs, type_list=[1], self_wxid=None):
     res = []

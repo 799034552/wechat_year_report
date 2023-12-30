@@ -803,6 +803,8 @@ def create_person_res(msgs, res, wxid, wxid_to_name, is_use_remark=True,name=Non
                                         top_margin=[0,0,0])
         
         y += height+space
+        if bimg_num == 0:
+            bimg_num = 1
         background_image, height = draw_multi_text(background_image, ["你发送了其中的",str(int(his_bimg_num / bimg_num * 100))+"%"], [30,55],(x,y),
                                         color_list=["white", "white"],font_width_list=["normal", "bold"],
                                         space=[5,5,0],
@@ -1749,6 +1751,7 @@ def create_room_res(msgs, res, wxid, wxid_to_name, room_name=None): #name_type 0
                 img_list.append(i)
         else:
             img_list.append(im)
+
     big_img = vertical_concat(img_list)
     return big_img
 
@@ -1764,6 +1767,7 @@ def create_res_img_by_wxid(wxid, name=None):
         elif name_type == 1:
             name = wxid_to_name[wxid]["nickname"]
     big_img.save(f"生成结果/{name}.png")
+    print("生成完成，路径在：", f"生成结果/{name}.png")
 
 import argparse
 if __name__ == "__main__":
@@ -1774,7 +1778,7 @@ if __name__ == "__main__":
                     help="开始日期")
     parser.add_argument("-e", "--end_time",default="2023.12.31",
                     help="结束日期")
-    parser.add_argument("-n", "--name_type", type=int,default=2,
+    parser.add_argument("-n", "--name_type", type=int,default=0,
                     help="使用备注还是微信名，0备注 1微信名 2自己输入")
     parser.add_argument("-m", "--mode",type=int,default=0,
                     help="范围，0单人或单群 1为所有群生成 2为所有人生成")
@@ -1806,6 +1810,7 @@ if __name__ == "__main__":
         print(wxid)
         if wxid is None:
             print("没找到这个人或群")
+            exit()
         if name_type == 0:
             name = wxid_to_name[wxid]["conRemark"]
         elif name_type == 1:
